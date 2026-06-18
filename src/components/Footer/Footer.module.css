@@ -1,0 +1,16 @@
+footer img {
+  width: 30px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3em;
+}
+
+a:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease-in-out;
+}
