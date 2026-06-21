@@ -8,6 +8,9 @@ footer {
   align-items: center;
   gap: 10px;
   font-size: 1.3em;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
 }
 
 a:hover {

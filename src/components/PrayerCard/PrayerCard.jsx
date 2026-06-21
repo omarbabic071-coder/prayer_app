@@ -1,10 +1,10 @@
-import "./PrayerCard.module.css";
+import styles from "./PrayerCard.module.css";
 
-function PrayerCard() {
+function PrayerCard({ prayerName = "Unknown", prayerTime = "00:00" }) {
   return (
     <section>
-      <p className="prayer-name">Fajr</p>
-      <p className="prayer-time">12:00</p>
+      <p className={styles.prayerName}>{prayerName}</p>
+      <p className={styles.prayerTime}>{prayerTime}</p>
     </section>
   );
 }
