@@ -1,8 +1,9 @@
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import PrayerCard from "./components/PrayerCard/PrayerCard";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import PrayerCard from "./components/PrayerCard";
 import Container from "./components/Container";
-import LocationAndDate from "./components/LocationAndDate/LocationAndDate";
+import LocationAndDate from "./components/PrayerCard";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -49,7 +50,10 @@ function App() {
   return (
     <>
       <Header location={location} setLocation={setLocation} />
-      <LocationAndDate location={data.lokacija} date={data.datum} />
+      <LocationAndDate
+        location={data ? data.lokacija : "Sarajevo"}
+        date={data ? data.datum[1] : 12}
+      />
       <Container>
         {errorMessage && <p>{errorMessage}</p>}
         {vakat.map((time, i) => (
