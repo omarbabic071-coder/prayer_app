@@ -2,7 +2,9 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import PrayerCard from "./components/PrayerCard/PrayerCard";
 import Container from "./components/Container";
+import LocationAndDate from "./components/LocationAndDate/LocationAndDate";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
   const [data, setData] = useState(null);
@@ -12,14 +14,17 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(
+        const response = await axios.get(
           `https://api.vaktija.ba/vaktija/v1/${location}`,
+          {
+            params: {
+              postId: 5,
+            },
+          },
         );
-        if (!response.ok) throw new Error("Could not fetch data.");
-        const json = await response.json();
-        console.log(json);
+        console.log(response.data);
 
-        setData(json);
+        setData(response.data);
         setErrorMessage(null);
       } catch (error) {
         console.error(error);
@@ -44,13 +49,13 @@ function App() {
   return (
     <>
       <Header location={location} setLocation={setLocation} />
+      <LocationAndDate location={data.lokacija} date={data.datum} />
       <Container>
         {errorMessage && <p>{errorMessage}</p>}
-        {!errorMessage && vakat.length === 0 && <p>Loading...</p>}
-        {vakat.map((time, idx) => (
+        {vakat.map((time, i) => (
           <PrayerCard
-            key={idx}
-            prayerName={prayerNames[idx] || `Prayer ${idx + 1}`}
+            key={i}
+            prayerName={prayerNames[i] || `Prayer ${i + 1}`}
             prayerTime={time}
           />
         ))}

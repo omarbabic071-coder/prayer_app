@@ -1,8 +1,10 @@
+import { useState } from "react";
 import styles from "./Header.module.css";
 
-function Header({ location = "", setLocation }) {
+function Header({ setLocation }) {
+  let [enteredLocation, setEnteredLocation] = useState(77);
   function handleLocationChange(event) {
-    setLocation(event.target.value);
+    setEnteredLocation(event.target.value);
   }
 
   return (
@@ -13,10 +15,10 @@ function Header({ location = "", setLocation }) {
         <input
           type="text"
           placeholder="Sarajevo"
-          value={location}
+          value={enteredLocation}
           onChange={handleLocationChange}
         />
-        <button type="button" onClick={() => setLocation(location)}>
+        <button type="button" onClick={() => setLocation(enteredLocation)}>
           Search
         </button>
       </div>

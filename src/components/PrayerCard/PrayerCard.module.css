@@ -6,6 +6,10 @@ section {
   border-radius: 10px;
   width: fit-content;
   text-align: center;
+  min-width: 250px;
+  min-height: 250px;
+  display: grid;
+  place-items: center;
 }
 
 .prayerName {
