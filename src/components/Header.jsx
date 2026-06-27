@@ -6,37 +6,10 @@ function Header({ setLocation }) {
     setEnteredLocation(event.target.value);
   }
 
-  const styles = {
-    header: {
-      top: 0,
-      left: 0,
-      position: "fixed",
-      width: "100%",
-      display: "flex",
-      justifyContent: "space-evenly",
-      alignItems: "center",
-      gap: "10px",
-      backgroundColor: "rgb(0 0 0 / 0.2)",
-      height: "fit-content",
-      padding: "8px 0",
-      zIndex: 10,
-    },
-    title: {
-      fontWeight: "bold",
-      fontSize: "1.1em",
-      margin: 0,
-    },
-    controls: {
-      display: "flex",
-      gap: "8px",
-      alignItems: "center",
-    },
-  };
-
   return (
-    <header style={styles.header}>
-      <p style={styles.title}>Vaktiya App Project</p>
-      <div style={styles.controls}>
+    <header className="my-0 mx-0 fixed  flex justify-evenly items-center z-10  gap-3 bg-black/20 top-0 w-dvw h-fit p-2 ">
+      <p className="font-bold text-2xl mx-0 my-0">Vaktiya App Project</p>
+      <div className="flex gap-2 justify-center">
         <label>City: </label>
         <input
           type="text"
