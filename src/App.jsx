@@ -45,7 +45,7 @@ function App() {
   const vakat = data?.vakat || [];
   const prayerNames = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
 
-  let prayerTimeInMins = data?.vakat.map((time) => {
+  let prayerTimesInMins = vakat.map((time) => {
     const [hours, minutes] = time.split(":");
     return Number(hours) * 60 + Number(minutes);
   });
@@ -54,23 +54,30 @@ function App() {
     <>
       <Header location={location} setLocation={setLocation} />
 
-      <PrayerTimer timer={12} />
-      <Location location={data ? data.lokacija : "Sarajevo"} />
-      <DateComponent date={data ? data.datum[1] : 10} />
+      <PrayerTimer prayerTimesInMins={prayerTimesInMins} />
+      <Location location={data ? data.lokacija : "Unknown"} />
+      <DateComponent
+        date={`${now.getDate()}.${now.getUTCMonth() + 1}.${now.getFullYear()}`}
+      />
 
       <Container>
         {errorMessage && <p>{errorMessage}</p>}
-        {vakat.map((time, i) => (
-          <PrayerCard
-            key={i}
-            prayerName={prayerNames[i] || `Prayer ${i + 1}`}
-            prayerTime={time}
-            isCurrentPrayer={
-              currentTimeInMins < prayerTimeInMins[i + 1] &&
-              currentTimeInMins > prayerTimeInMins[i]
-            }
-          />
-        ))}
+        {vakat.map((prayer, i) => {
+          const isSunrise = prayerNames[i] === "Sunrise";
+
+          return (
+            <PrayerCard
+              key={i}
+              prayerName={prayerNames[i] || `Prayer ${i + 1}`}
+              prayerTime={vakat[i]}
+              isCurrentPrayer={
+                !isSunrise &&
+                currentTimeInMins < prayerTimesInMins[i + 1] &&
+                currentTimeInMins > prayerTimesInMins[i]
+              }
+            />
+          );
+        })}
       </Container>
       <Footer />
     </>
